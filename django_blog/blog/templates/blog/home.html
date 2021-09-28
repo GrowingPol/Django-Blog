@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Blog </title>
-</head>
-<body>
+{% extends "blog/templateBase.html" %}
+{% block content %}
     <h1>Blog Home!</h1>
     {%for post in posts%}
         <h2>{{post.title}}</h2>
         <p>By {{post.author}} on {{post.date_posted}}</p>
         <p>{{post.content}}</p>
     {%endfor%}
-
-
-</body>
-</html>
+{% endblock content %}
