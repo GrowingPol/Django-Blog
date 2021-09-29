@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
    <!-- Required meta tags (Bootstrap)-->
@@ -7,6 +9,8 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--    main css-->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
 
     {% if title %}
         <title>{{title}}</title>
@@ -19,9 +23,7 @@
             <div class="container">
                 <a class="navbar-brand mr-4" href="/">Django-Blog</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                    <h1>Navbar</h1>
                     <span class="navbar-toggler-icon"></span>
-                    <h1>Navbar</h1>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
@@ -46,15 +48,14 @@
                 {% block content %}{% endblock content %}
             </div>
             <div class="col-md-4">
-                <h1>Hey </h1>
                 <div class="content-section">
-                    <h1>content section </h1>
-                    <p class="text-muted">Put information
+                    <h1>Content </h1>
+                    <p class="text-muted">Categories
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">Lista1</li>
-                            <li class="list-group-item list-group-item-light">Lista2</li>
-                            <li class="list-group-item list-group-item-light">Lista3</li>
-                            <li class="list-group-item list-group-item-light">Lista4</li>
+                            <li class="list-group-item list-group-item-light">Latest Posts</li>
+                            <li class="list-group-item list-group-item-light">Announcements</li>
+                            <li class="list-group-item list-group-item-light">Calendar</li>
+                            <li class="list-group-item list-group-item-light">FAQ</li>
                         </ul>
                     </p>
                 </div>
