@@ -136,3 +136,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'blog-home' # redirect to home on user login
+
+LOGIN_URL = 'login' #redirect to login when there is not an active session of a profile and put the wanted page in a query to be accesed after a successfull login.
