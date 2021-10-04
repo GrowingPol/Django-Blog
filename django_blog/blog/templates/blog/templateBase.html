@@ -12,6 +12,7 @@
     <!--    main css-->
     <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
 
+    <!--If there is a predefined title, use it, if not, use blog (start)-->
     {% if title %}
         <title>{{title}}</title>
     {% else %}
@@ -45,7 +46,18 @@
     <main role="main" class="container">
         <div class="row">
             <div class="col-md-8">
+                <!--User creation feedback (start)-->
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{message.tags}}"> <!--take the type of alert configured in view.py-->
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                <!--User creation feedback (end)-->
                 {% block content %}{% endblock content %}
+
+            <!--Sidebar (start)-->
             </div>
             <div class="col-md-4">
                 <div class="content-section">
@@ -61,12 +73,8 @@
                 </div>
             </div>
         </div>
+        <!--Sidebar (end)-->
     </main>
-
-<!--  <div class="container">-->
-<!--    {% block content2 %}{% endblock %}-->
-<!--  </div>-->
-
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
