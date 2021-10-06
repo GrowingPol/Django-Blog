@@ -2,5 +2,14 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-  <h1>{{ user.username }}</h1> <!--user is contained in Django, it is the actual user-->
+  <div class="content-section">
+    <div class="media">
+      <img src="{{ user.profile.image.url}}" class="rounded-circle account-img">
+      <div class="media-body">
+        <h2 class="account-heading">{{ user.username}}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+      </div>
+    </div>
+    <!--Form-->
+  </div>
 {% endblock content  %}
