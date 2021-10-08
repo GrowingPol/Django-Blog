@@ -19,8 +19,20 @@ def register(request):
 
 @login_required #its used to demand a user
 def profile(request):
-    u_form = UserUpdateform()#user update form
-    p_form = ProfileUpdateForm()#profile update form
+    if request.method == 'POST':
+        u_form = ProfileUpdateForm(instance=request.user)  # user update form with actual user data
+        p_form = UserUpdateform(request.POST,
+                                request.FILES, #for image
+                                instance=request.user.profile)#prfile update form with actual profile data
+
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f"Your account has been updated succesfully!")
+            return redirect('profile') # use redirect to avoid message asking if you want to leave in browser
+    else:
+        u_form = UserUpdateform(instance=request.user)  # user update form with actual user data
+        p_form = ProfileUpdateForm(instance=request.user.profile)  # profile update form with actual profile data
 
     context= {
         'u_form': u_form,
