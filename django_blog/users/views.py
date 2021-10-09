@@ -20,8 +20,8 @@ def register(request):
 @login_required #its used to demand a user
 def profile(request):
     if request.method == 'POST':
-        u_form = ProfileUpdateForm(instance=request.user)  # user update form with actual user data
-        p_form = UserUpdateform(request.POST,
+        u_form = UserUpdateform(request.POST, instance=request.user)  # user update form with actual user data
+        p_form = ProfileUpdateForm(request.POST,
                                 request.FILES, #for image
                                 instance=request.user.profile)#prfile update form with actual profile data
 
