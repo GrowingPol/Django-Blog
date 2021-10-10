@@ -7,6 +7,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
+    DeleteView,
 )
 
 
@@ -47,6 +48,15 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView): #LoginR
             return True
         return False
 
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
+    model = Post
+    success_url = '/' # without this, it doesn´t delete
+
+    def test_func(self): # function required for UserPassesTestMixin
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 def about(request):
     return render(request,'blog/about.html',{'title':'The About Page'})
