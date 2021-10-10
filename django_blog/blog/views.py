@@ -5,7 +5,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import (
     ListView,
     DetailView,
-    CreateView
+    CreateView,
+    UpdateView,
 )
 
 
@@ -25,6 +26,14 @@ class PostDetailView(DetailView):
     model = Post
 
 class PostCreateView(LoginRequiredMixin,CreateView): #LoginRequiredMixin avoid to access this view without logging in
+    model = Post
+    fields = ['title', 'content']
+
+    def form_valid(self,form):
+        form.instance.author = self.request.user #set author for the post
+        return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin,UpdateView): #LoginRequiredMixin avoid to access this view without logging in
     model = Post
     fields = ['title', 'content']
 
