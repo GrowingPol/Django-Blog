@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from blog.models import Post
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
     DetailView,
@@ -33,13 +33,20 @@ class PostCreateView(LoginRequiredMixin,CreateView): #LoginRequiredMixin avoid t
         form.instance.author = self.request.user #set author for the post
         return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin,UpdateView): #LoginRequiredMixin avoid to access this view without logging in
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin,UpdateView): #LoginRequiredMixin avoid to access this view without logging in
     model = Post
     fields = ['title', 'content']
 
     def form_valid(self,form):
         form.instance.author = self.request.user #set author for the post
         return super().form_valid(form)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
 
 def about(request):
     return render(request,'blog/about.html',{'title':'The About Page'})
